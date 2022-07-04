@@ -1,0 +1,172 @@
+VERSION: 1
+abtfs:
+    blur:
+        enable: 0
+    bright:
+        enable: 1
+    channel_dropout:
+        drop_range: (1, 1)
+        enable: 0
+        fill_value: 127
+    channel_shuffle:
+        enable: 0
+    cutout:
+        enable: 1
+        fill_value: 127
+        num_holes: 10
+        size: 20
+    distortion:
+        enable: 0
+    hue:
+        enable: 0
+    noise:
+        enable: 1
+    random_grid_shuffle:
+        enable: 0
+        grid: 2
+    rotate:
+        enable: 1
+callback:
+    checkpoint:
+        mode: 'max'
+comment: ''
+dataset:
+    batch_size: 8
+    datapath: '../datasets'
+    name: 'fakedata'
+    testlist: './datasets/test.txt'
+    trainlist: './datasets/train.txt'
+    workers: 4
+debug: False
+evaluator:
+    name: 'DefaultEvaluator'
+    num_epochs: 200
+input:
+    size: (224, 224)
+kd:
+    enable: 0
+    loss:
+        alpha: 0.5
+        temperature: 2
+    model:
+        name: 'Nasnetamobile'
+        path: 'teacher_net.pt'
+label_transforms:
+    name: 'default'
+loss:
+    CrossEntropy:
+        class_weight: []
+    MultiScaleLoss:
+        downscale: 1
+        mask: False
+        sub_loss: 'L1'
+        weights: [0.32, 0.16, 0.08, 0.04, 0.02, 0.01, 0.005]
+    focal_loss:
+        alpha: [2.03316646, 3.4860515, 5.50677966, 1.0, 6.33333333, 8.24619289, 3.32889344, 2.75338983, 7.98280098, 8.57255937]
+        gamma: 2
+        size_average: True
+    name: 'CrossEntropy'
+mixup:
+    alpha: 0.4
+    enable: 0
+model:
+    aux_weight: 0.4
+    classes: 10
+    depth: 5
+    dropout_rate: 0.5
+    expansion: 2
+    finetune: False
+    in_channels: 3
+    max_disp: 40
+    name: 'ClsNet'
+    num_layers: 5
+    num_nodes: 5
+    out_channels: 32
+    resume_path: ''
+    use_aux_heads: True
+mutator:
+    EnasMutator:
+        arch_loss_weight: 0.02
+        branch_bias: 0.25
+        cell_exit_extra_step: False
+        lstm_num_layers: 1
+        lstm_size: 64
+        reward_function: ''
+        reward_weight: 50
+        skip_target: 0.4
+        tanh_constant: 1.5
+    name: 'EnasMutator'
+optim:
+    base_lr: 0.001
+    momentum: 0.9
+    name: 'adam'
+    scheduler:
+        gamma: 0.1
+        milestones: [10, 25, 35, 50]
+        mode: 'min'
+        name: 'CosineAnnealingLR'
+        patience: 10
+        step_size: 10
+        t_0: 5
+        t_max: 50
+        t_mul: 20
+        verbose: True
+    weight_decay: 0.0005
+output_root: './outputs'
+seed: 8
+trainer:
+    EnasTrainer:
+        baseline_decay: 0.999
+        entropy_weight: 0.0001
+        mutator_lr: 0.00035
+        mutator_steps: 50
+        mutator_steps_aggregate: 20
+        skip_weight: 0.8
+    accumulate_steps: 1
+    device: 'cuda'
+    device_ids: [0]
+    name: 'EnasTrainer'
+    num_epochs: 40
+    startEpoch: 0
+    startRound: 0
+    warm_start_epoch: 5
+transforms:
+    img:
+        aug_cifar: False
+        aug_imagenet: False
+        center_crop:
+            enable: 0
+        color_jitter:
+            brightness: 0.0
+            contrast: 0.0
+            enable: 0
+            hue: 0.0
+            saturation: 0.0
+        random_crop:
+            enable: 1
+            padding: 0
+        random_horizontal_flip:
+            enable: 1
+            p: 0.5
+        random_resized_crop:
+            enable: 0
+            ratio: (0.75, 1.3333333333333333)
+            scale: (0.5, 1.0)
+        random_rotation:
+            degrees: 10
+            enable: 1
+        random_vertical_flip:
+            enable: 1
+            p: 0.5
+        resize:
+            enable: 1
+    name: 'DefaultTransforms'
+    tensor:
+        normalization:
+            mean: [0.5, 0.5, 0.5]
+            std: [0.5, 0.5, 0.5]
+        random_erasing:
+            enable: 0
+            p: 0.5
+            ratio: ((0.3, 3.3),)
+            scale: (0.02, 0.3)
