@@ -255,7 +255,11 @@ class EAMutator(RandomMutator):
         if len(meters) <= 1:
             speed = meters[0]
         else:
-            speed = np.polyfit(np.arange(len(meters)), np.array(meters), 1)[0] # slope of increase curve
+            # speed = np.polyfit(np.arange(len(meters)), np.array(meters), 1)[0] # slope of increase curve
+            x = np.arange(len(meters))
+            y = np.array(meters)
+            A = np.vstack([x, np.ones(len(x))]).T
+            speed, c = np.linalg.lstsq(A, y, rcond=None)[0]
             if speed < 0: speed = (abs(speed)+1e-8) * 1e-8
         return speed
 
