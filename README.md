@@ -2,13 +2,18 @@
 
 <div align="center">
 
-<h1>[MICCAI2022] Evolutionary-Multi-objective-Architecture-Search-Framework: Application to COVID-19 3D CT Classification</h1>
+<h1><a href='https://arxiv.org/abs/2101.10667'>[MICCAI2022] Evolutionary-Multi-objective-Architecture-Search-Framework: Application to COVID-19 3D CT Classification<a></h1>
 
 <div>
-    <a href='https://marsggbo.github.io/' target='_blank'>He Xin</a>, Guohao Ying, Jiyong Zhang, and Xiaowen Chu.
+    <a href='https://marsggbo.github.io/' target='_blank'>He Xin<sup>1</sup></a>, Guohao Ying<sup>2</sup>, Jiyong Zhang<sup>3</sup>, and Xiaowen Chu<sup>14</sup>
+    <br>
+    <span><sup> 1</sup> Hong Kong Baptist University, Hong Kong, China </span><br>
+    <span><sup> 2</sup> University of Southern California, CA, USA </span><br>
+    <span><sup> 3</sup> School of Automation, Hangzhou Dianzi University, Hang Zhou, China </span><br>
+    <span><sup> 4</sup> The Hong Kong University of Science and Technology (Guangzhou), China </span><br>
+</div>
 </div>
 
-</div>
 
 ## Install
 
